@@ -2,14 +2,14 @@
 const Router = require("express").Router;
 const routerMensajes = Router();
 
-const { isAuth } = require("../middlewares/permisos");
+const { isAuth } = require("../../middlewares/permisos");
 
 const {
     getAllMessages,
     getMessagesById,
     deleteMessageById,
     postNewMessage,
-} = require("../services/messages-services");
+} = require("../../services/messages-services");
 
 
 routerMensajes.get("/api/mensajes/", isAuth, getAllMessages);

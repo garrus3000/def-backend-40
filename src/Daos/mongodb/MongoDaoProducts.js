@@ -1,5 +1,5 @@
 
-const mongoose = require("mongoose");
+
 const MongoClassContainer = require("../../containers/MongoClassContainer");
 const ProductSchema = require("../../config/models/ProductSchema");
 
