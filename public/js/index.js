@@ -63,7 +63,6 @@ const chat = document.getElementById("enviarMensaje");
 chat.addEventListener("submit", async (e) => {
     e.preventDefault();
     const mensaje = {
-        id: 1,
         author: {
             email: e.target.email.value,
             nombre: e.target.nombre.value,
@@ -74,7 +73,6 @@ chat.addEventListener("submit", async (e) => {
             fecha: new Date().toLocaleString(),
         },
         text: e.target.text.value,
-        id_text: 1
     };
     await socket.emit("new-message", mensaje );
     e.target.text.value = "";
