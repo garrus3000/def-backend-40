@@ -1,5 +1,6 @@
 require('dotenv').config();
-
+const mongoose = require('mongoose');
+const { logger, loggerError } = require('../logs/winston');
 
 const config = {
     mongoDb: {
@@ -11,4 +12,13 @@ const config = {
     },
 }
 
-module.exports = config;
+const ConnectToMongoDB = () => {
+    try {
+        mongoose.connect(config.mongoDb.url, config.mongoDb.options);
+        logger.log("info", "Connected to MongoDB");
+    } catch (error) {
+        loggerError.log("error", error.message);
+    }
+};
+
+module.exports = {config, ConnectToMongoDB};

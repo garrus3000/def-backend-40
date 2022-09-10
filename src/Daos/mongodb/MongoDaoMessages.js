@@ -2,11 +2,19 @@
 const MongoClassContainer = require("../../containers/MongoClassContainer");
 const MessagesSchema = require("../../config/models/MessagesSchema");
 
+let instance;
 
 class MongoDaoMessages extends MongoClassContainer {
     constructor() {
         super('mensajes', MessagesSchema)
     }
+
+    static getInstance() {
+        if (instance === undefined) {
+            instance = new MongoDaoMessages();
+        }
+        return instance;
+    };
 
     async save(msj) {
         try {

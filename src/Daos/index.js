@@ -1,23 +1,25 @@
 
-
 require("dotenv").config()
+
+const yargArgs = require("../utils/yarg-cli")
+
 
 let productos
 let carritos
 let usuarios
 let mensajes
 
-switch (process.env.DB_HOST) {
+switch (yargArgs.DB_HOST || process.env.DB_HOST) {
 	case "mongodb":
 		const MongoDaoCarts = require("./mongodb/MongoDaoCarts");
 		const MongoDaoProducts = require("./mongodb/MongoDaoProducts");
 		const MongoDaoUsers = require("./mongodb/MongoDaoUsers");
 		const MongoDaoMessages = require("./mongodb/MongoDaoMessages")
 
-		carritos = new MongoDaoCarts();
-		productos = new MongoDaoProducts();
-		usuarios = new MongoDaoUsers();
-		mensajes = new MongoDaoMessages();
+		carritos = MongoDaoCarts.getInstance();
+		productos = MongoDaoProducts.getInstance();
+		usuarios = MongoDaoUsers.getInstance();
+		mensajes = MongoDaoMessages.getInstance();
 		break;
 
 	default:

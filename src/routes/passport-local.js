@@ -12,11 +12,6 @@ const { cartDao } = require('../daos/index.js');
 const User = mongoose.model('usuarios', usuarioSchema);
 
 
-mongoose.connect(process.env.MONGO_ATLAS_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-
 passport.use(
     "signup",
     new LocalStrategy(
@@ -31,7 +26,8 @@ passport.use(
                 return done(null, false);
             }
             const userCart = await cartDao.createCarrito()
-            const newUser = new User();
+            // const newUser = new User();
+            const newUser = User();
             const { nombre, age, phone, adress } = req.body; //campos por formulario
             newUser.cart = userCart;
             newUser.nombre = nombre;

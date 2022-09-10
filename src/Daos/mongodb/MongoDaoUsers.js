@@ -2,11 +2,19 @@
 const MongoClassContainer = require("../../containers/MongoClassContainer");
 const UsuarioSchema = require("../../config/models/UsuarioSchema");
 
-class MongoDaoUsers extends MongoClassContainer {
+let instance;
 
+class MongoDaoUsers extends MongoClassContainer {
     constructor() {
         super('usuarios', UsuarioSchema)
     }
+
+    static getInstance() {
+        if (instance === undefined) {
+            instance = new MongoDaoUsers();
+        }
+        return instance;
+    };
 
     getByEmail = async (email) => {
         try {

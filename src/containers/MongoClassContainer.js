@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
+const { ConnectToMongoDB } = require("../config/config");
+
+ConnectToMongoDB();
 
 class MongoClassContainer {
-
     constructor(collection, schema) {
         this.collection = mongoose.model(collection, schema)
     }
